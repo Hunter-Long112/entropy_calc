@@ -1,0 +1,18 @@
+Entropy Report for test.txt:
+Number of Discrete Symbols:	12
+Symbol Occurences:
+Symbol: c		Occurences: 4
+Symbol: x		Occurences: 2
+Symbol: y		Occurences: 6
+Symbol: j		Occurences: 2
+Symbol: k		Occurences: 1
+Symbol: p		Occurences: 1
+Symbol: z		Occurences: 1
+Symbol: f		Occurences: 1
+Symbol: w		Occurences: 1
+Symbol: d		Occurences: 1
+Symbol: h		Occurences: 5
+Symbol: a		Occurences: 5
+Total Number of Symbols:	30
+Max Entropy:			3.584962500721156
+File Entropy:			3.215922063835167
