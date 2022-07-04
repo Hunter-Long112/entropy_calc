@@ -1,0 +1,133 @@
+;2022_06;  CS4463: Steganography: (001) ---> Lab#3:  TimeLimit: 180 minutes  ---  Version  1.07
+
+
+
+QUESTIONS:  (26)  Total Points:  ( 13.0)
+
+1. <1 pt> Use img1_A_24.bmp for the following questions.
+
+   1.a. (  0.5 pts) The dimensions are 480x270. The image size, viewed in a hex editor is: C0 EE 05 00. What is the image size in bytes in decimal? Do not confuse with file size which includes the header. (also can do 480x270 = 129600 x 3 bytes/pixel = 388800) (also can just convert hex size to decimal, remember it is in little endian in the file)
+	Files Size = F6 EE 05 00 = 0x5EEF6 = 388854 bytes 
+	Data offset = 36 00 00 00 = 0x36 = 54 bytes
+	Image Size = File Size - Data Offset 
+	= 388800 bytes
+
+   1.b. (  0.5 pts) When this image is converted to 8 bits/pixel, what is the new image size? Two ways to solve this: 1. Math, 2. Use software to convert it to 8-bit and check out the header.
+	24 bits/pixel -> 8 bits/pixel = 1/3 the size
+	1/3 of 388800 
+	= 129600 bytes
+
+2. <2 pts> Use file M1_24.bmp for the following questions.
+
+   2.a. (  0.5 pts) Determine the file offset in hexadecimal to the first pixel in the top line. What is that offset in hex? Use math, hex editor, whatever works for you.
+	Based on file header, image is 0x00000200 x 0x00000200 -> 512 pixels x 512 pixels
+	Data offset is 0x36 -> 54 bytes
+	(511 rows before top row of pixels) x (512 pixels a row) x (3 bytes a pixel) + (54 bytes for file header) = 784950 
+	= 0xBFA36 
+
+   2.b. (  0.5 pts) Modify 8 pixels such that there is a tiny GREEN line in the upper left corner. What is the Blu,Grn,Red sequence of hex digits that accomplish this? (Example: 99 AA 00)
+	00 FF 00
+
+   2.c. (  0.5 pts) How many bytes did you modify?
+	24 bytes
+
+   2.d. (  0.5 pts) From the data section of the image, using just 4 pixels, extract the 3 Least Significant Bits from the blue component, 1 LSB from the green component, and 2 LSBs from the red component - that is 6 bits per pixel. Show the resulting hexadecimal sequence. hh,hh,hh
+	(I used the first four pixels in the data section, that is to say the first four pixels of the file starting in the bottom left corner and going right in the row)
+	67 6D AE, 51 5F A1, 40 4B 8E, 3E 3E 6D
+	01100111 01101101 10101110, 01010001 01011111 10100001, 01000000 01001011 10001110, 00111110 00111110 01101101
+	11111000 11010001 10110001
+	F8, D1, B1
+
+3. <2 pts> Use file M1_08.bmp for the following questions.
+
+   3.a. (  0.5 pts) At what file offset (in hexadecimal) is the first byte of pixel data?
+	0x436
+
+   3.b. (  0.5 pts) What is the hex value for pixel #5? Recall, start numbering at zero, so pixel #0 is the first byte of pixel data.
+	0x2B
+
+   3.c. (  0.5 pts) If a pixel had a value of 0x0C, what is the hex color sequence (hh hh hh) for that pixel. Note: it's in Blu/Grn/Red order. Since these are individual bytes, do not treat as little endian values.
+	2B 31 2D
+
+   3.d. (  0.5 pts) Run the following command:  "wbh.exe M1_08.bmp" and examine the histogram (textual is best). Find the most common value. Use a hex editor, find that entry in the pallete, and change the color to YELLOW. (00 FF FF) MOST of the pixels changed are:
+   a. On the mantis
+   b. On the green leaves
+   c. On the background
+   d. On the brown stems of the plants
+	c
+
+4. <1 pt> Use img2_C_08.bmp for the following questions.
+
+   4.a. (  0.5 pts) There are no actual white pixels in this image, however there are some that are close. Use wbh.exe to find the most common palette entry. What is the hexadecimal value of the palette entry that corresponds to the majority of the near-white pixels?
+	0xFE
+
+   4.b. (  0.5 pts) Find the palette entry that corresponds to the majority of the "white" pixels and change it to 00 00 00. If you got it right, a large part of the image will be black. What was the Blu/Grn/Red value that you had to change? Since they were all the same, a 1 byte answer in hex is sufficient.
+	FB FB FB
+
+5. <2 pts> Use M1_04_ED.bmp for the following questions: ED = Error Diffusion
+
+   5.a. (  0.5 pts) How many bytes required by the palette?
+	16 possible entries * 4 bytes per entry = 64 bytes
+
+   5.b. (  0.5 pts) Change palette entry zero to white (FF FF FF) and the first 8 pixels to all zeros - view the image. How many total bytes did you have to modify in the pixel data? Include any pixels that were already zero.
+	4 bytes
+
+   5.c. (  0.5 pts) Mentally divided the modified image into a left half and a right half. Which half has the most white pixels?
+   a. left
+   b. right
+   c. pretty close to even
+	c
+
+   5.d. (  0.5 pts) Change the last palette entry to black. Which is affected the most:
+   a. mantis eyes
+   b. mantis claws
+   c. mantis back
+   d. majority of the leaves
+	c
+
+6. <2 pts> Use M1_01_NC.bmp (NC = Nearest Color) for the following questions. 
+
+   6.a. (  0.5 pts) Change the palette so the background is yellow and the mantis is black as shown in "YellowMantis.png"  At what file offset did you have to enter the yellow color values? Answer in hex.
+	0x36 is the offset of the first color in the palette (the one I changed to yellow)
+
+   6.b. (  0.5 pts) How many bytes required for each horizontal line?
+	Image is 512x512 -> 512 pixels in one row
+	8 pixels per byte -> 512 / 8 
+	= 64 bytes per row
+
+   6.c. (  0.5 pts) For byte #10 in the data (0x7C) which pixel number is the first one to be black? Note that pixel indexes start at 0 and since this is the 10th byte over, you already have X horizontal pixels.
+	10 bytes before this one * 8 pixels per byte -> 80 pixels before this byte (0-79)
+	0x7C = 0111 1100 
+	pixel number 81 is the first one in byte #10 to be black
+
+   6.d. (  0.5 pts) Starting at offset 0x2000 in the file, using a hex editor, add the hex value 0xF3 32 times. Save the image to disk and view it. What do you see?
+	There is a dashed horizontal line about a third of the way up from the bottom of the image.
+
+7. <1 pt> Use M1_01_ED.bmp (ED = Error Diffusion) for the following questions.
+
+   7.a. (  0.5 pts) Change the palette so the black pixels are pure green. The palette now has all zeros except for one 0xFF. At what file offset is the 0xFF? (Answer in hex)
+	0x37, I don't think this is true though because the other palette entry is white, which is represented as FF FF FF 00 in the palette?
+
+   7.b. (  0.5 pts) We are going to "hide" the greeting, "Hello Mandy!" in the beginning of the pixel data in the modified (green) mantis. Replace the first 12 bytes of pixel data and the last 12 bytes of pixel data (offset 0x8032) with the following hex sequence:
+\48 65 6C 6C 6F 20 4D 61 6E 64 79 21
+\View the image. When comparing to the original green mantis, there are two places you can see distortion. Where are they?
+   a. upper left, upper right
+   b. upper left, lower right
+   c. lower left, upper right
+   d. lower left, lower right
+   e. I can't see $hit!
+	c
+
+8. <2 pts> Use audio_16_2.wav (16-bit, 2 channels) for the following questions. Play the audio clip first. Once you make some of these changes, feel free to experiment.
+
+   8.a. (  0.5 pts) The length of the data chunk is stored as a 4 byte hex number in little endian format. What is that hexadecimal value? (Answer in big endian format)
+	0x0021E2E0
+
+   8.b. (  0.5 pts) Using a hex editor, change the number of channels from 2 to 1. Listen to the audio. What is the effect? (Think about why?)
+	The audio seemed to be composed of just the bass range (everything is much deeper), I would guess this is because one channel is for bass and one channel is for higher frequency treble.
+
+   8.c. (  0.5 pts) Use a hex editor to change the original file's sampling rate from 0x0000AC44 to 0x00015888 (that's double). What is the effect on the voice?
+	It made it much faster and higher pitched, also cut the time of the audio in half which makes sense, similar affect to fast forwarding by x2.
+
+   8.d. (  0.5 pts) Using a hex editor, change the length to be 0x108000. What is the last word spoken in the clip?
+	The last full word is one, he just barley starts to say second.
