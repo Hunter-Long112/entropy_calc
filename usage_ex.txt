@@ -1,0 +1,42 @@
+PS C:\Users\hunte\Desktop\steggo\labs\lab4\Lab#4_Data&ProgramFiles> .\Steg_LSB_1.19.exe
+
+
+ C:\Users\hunte\Desktop\steggo\labs\lab4\Lab#4_Data&ProgramFiles\Steg_LSB_1.19.exe  Version: 1.18
+
+    by John A. Ortiz, last update Jun 2012
+
+
+
+To Hide one bitmapped image inside another:
+        C:\Users\hunte\Desktop\steggo\labs\lab4\Lab#4_Data&ProgramFiles\Steg_LSB_1.19.exe -hide -c <cover file> -m <msg file> [-s <stego file>]
+
+To Extract a previously hidden bitmap image:
+        C:\Users\hunte\Desktop\steggo\labs\lab4\Lab#4_Data&ProgramFiles\Steg_LSB_1.19.exe -extract -s <stego file> [-m <message file>]
+
+To Hide or Extract an arbitrary message from the LSBs, specify -lsb in conjunction with -hide OR -extract:
+        C:\Users\hunte\Desktop\steggo\labs\lab4\Lab#4_Data&ProgramFiles\Steg_LSB_1.19.exe -hide -lsb -c <cover file> -m <msg file> [-s <stego file>]
+
+        C:\Users\hunte\Desktop\steggo\labs\lab4\Lab#4_Data&ProgramFiles\Steg_LSB_1.19.exe -extract -lsb -s <stego file> [-m <message file>]
+
+To Wipe (zero) the message bits:
+        C:\Users\hunte\Desktop\steggo\labs\lab4\Lab#4_Data&ProgramFiles\Steg_LSB_1.19.exe -wipe -s <stego file> [-o <output file>]
+
+To create Random message bits:
+        C:\Users\hunte\Desktop\steggo\labs\lab4\Lab#4_Data&ProgramFiles\Steg_LSB_1.19.exe -rnd -s <stego file> [-o <output file>]
+
+Parameters:Set number of bits to hide per pixel:        -b ( 1 to 8 def:1 )
+
+Options:
+To scramble the palette of the input file (8-bit only):
+        C:\Users\hunte\Desktop\steggo\labs\lab4\Lab#4_Data&ProgramFiles\Steg_LSB_1.19.exe -scramble -i <input file> [-o <output file>]
+
+To create an output image with random colors:
+        C:\Users\hunte\Desktop\steggo\labs\lab4\Lab#4_Data&ProgramFiles\Steg_LSB_1.19.exe -rndout -i <input file> [-o <output file>]
+
+To bit Slice the input image: (24-bit only)
+        C:\Users\hunte\Desktop\steggo\labs\lab4\Lab#4_Data&ProgramFiles\Steg_LSB_1.19.exe -slice -i <input file> [-o <output file>]
+
+
+        NOTES:
+        1.Order of parameters is irrelevant.
+        2.All selections in "[]" are optional.
