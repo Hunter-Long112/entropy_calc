@@ -1,0 +1,67 @@
+;2022_06;  CS4463: Steganography: (001) ---> HW#7:  TimeLimit: 180 minutes  ---  Version  1.07
+
+
+
+QUESTIONS:  (13)  Total Points:  (  7.0)
+
+1. (  0.5 pts) The primary goal of watermarking is:
+ a. robustness
+ b. security
+ c. capacity
+	a
+
+
+2. <2 pts> Match the following definitions with their terms:
+\A. Ensure a digital work has not been significantly modified
+\B. Prevent duplicates of a digital work from being produced
+\C. Used to determine who leaked pirated copies of a digital work
+\D. Able to prove ownership of a digital work
+
+   2.a. (  0.5 pts) Fingerprinting. Enter the single letter.
+	C
+
+   2.b. (  0.5 pts) Copyright Protection. Enter the single letter.
+	D
+
+   2.c. (  0.5 pts) Copy Protection. Enter a single letter.
+	B
+
+   2.d. (  0.5 pts) Authentication.  Enter a single letter.
+	A
+
+3. (  0.5 pts) List one attack type on watermarking.
+	Multiple Watermarking
+
+4. (  1.0 pts) I have created an image I wanted to digitally protect, so I have it watermarked with a sophisticated algorithm. I post it on a website believing it's secure, that if anyone decides to use it, I can prove it's mine. However, when I happened across the same image on another website, I couldn't prove it was mine because they used a mosaic attack. Briefly describe what the adversarial website did to post my image and negate my watermark.
+	They cut your image up into pieces, and then reassembled them in a way that is not technically the originally image, but is indistinguishable to the human eye from the original image.
+
+5. (  0.5 pts) E_BLIND's primary feature is _____ .
+ a. capacity
+ b. security
+ c. robustness
+ d. a & b above
+	b
+
+6. (  0.5 pts) When you are trying to extract the E_BLIND message, there are 3 possible answers.  zero, one, _____
+	there is no message
+
+7. (  0.5 pts) E_BLIND uses a technique called Linear Constipation to extract the message bit.  (True, False)
+	False
+
+8. (  0.5 pts) By spreading the message over random frequencies, the spread spectrium technique primarily achieves the goal of _____ .
+ a. capacity
+ b. security
+ c. robustness
+ d. a & b above
+	b
+
+9. (  0.5 pts) Steganography is commonly used by most malware applications. (True, False)
+	True
+
+10. (  0.5 pts) The FBI discovered that steganography was being used by Russian spies by _____.
+ a. analyzing images found on the target's laptop
+ b. analyzing images from the target's known website
+ c. intercepting phone calls discussing hidden data used
+ d. finding steganographic software on the target's laptop
+	C
+
