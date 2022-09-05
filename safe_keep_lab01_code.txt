@@ -1,0 +1,158 @@
+/* TURN PROGRAM */
+
+  #define RIGHT 100
+  #define LEFT  101
+
+  #include <PRIZM.h>
+  #include <Wire.h>  // include PRIZM library
+  PRIZM prizm;            // instantiate a PRIZM object “prizm” so we can use its functions
+
+void turn(int degree, int direction);
+
+void setup() {
+
+  prizm.PrizmBegin();           // initialize PRIZM
+  prizm.setMotorInvert(1,1);    // invert the direction of DC Motor 1 to harmonize direction
+                              
+}
+
+void loop() {
+
+    //turn(90, 1);
+    inPlaceTurn(90, LEFT);
+    delay(1000);
+    inPlaceTurn(90, RIGHT);
+    //turn(90, 0);
+    delay(3000);
+    
+    inPlaceTurn(180, LEFT);
+    delay(1000);
+    inPlaceTurn(180, RIGHT);
+    //turn(90, 0);
+    delay(3000);
+    
+    inPlaceTurn(270, LEFT);
+    delay(1000);
+    inPlaceTurn(270, RIGHT);
+    //turn(90, 0);
+    delay(3000);
+    
+    inPlaceTurn(360, LEFT);
+    delay(1000);
+    inPlaceTurn(360, RIGHT);
+    //turn(90, 0);
+    delay(3000);
+    //turn(180, 1);
+    //delay(1000);
+    //turn(180, 0);
+    //delay(5000);
+    
+    //turn(270, 1);
+    //delay(1000);
+    //turn(270, 0);
+    //delay(5000);
+    
+    //turn(360, 1);
+    //turn(360, 0);
+    //delay(5000);
+  //prizm.setMotorPowers(50,12.5);    // spin motor 1 a 50% power and motor 2 at 25% power
+                                  // resulting in the robot driving in a clockwise circle.
+}
+
+void turn(int degree, int direction){
+  
+  int time = map(degree, 0, 360, 0, 4600);
+  
+  // turn right
+  if(direction == 0){
+//    prizm.setMotorPowers(20, 3);
+//    delay(100);
+    prizm.setMotorPowers(40, 0);
+    delay(time);
+    prizm.setMotorPowers(125, 125);
+  }
+  
+  // turn left
+  if(direction == 1){
+//    prizm.setMotorPowers(3, 20);
+//    delay(100);
+    prizm.setMotorPowers(0, 40);
+    delay(time);
+    prizm.setMotorPowers(125, 125);
+  }
+  
+}
+
+void inPlaceTurn(int degree, int direction){
+  
+  int time = map(degree, 0, 360, 0, 3325);
+  
+  // turn right
+  if(direction == RIGHT){
+//    prizm.setMotorPowers(20, 3);
+//    delay(100);
+    prizm.setMotorPowers(30, -30);
+    delay(time);
+    prizm.setMotorPowers(125, 125);
+  }
+  
+  // turn left
+  if(direction == LEFT){
+//    prizm.setMotorPowers(3, 20);
+//    delay(100);
+    prizm.setMotorPowers(-30, 30);
+    delay(time);
+    prizm.setMotorPowers(125, 125);
+  }
+  
+}
+
+//void turnRight(){
+//  
+//}
+
+
+
+
+
+
+/* FOLLOW HAND PROGRAM */
+  #include <PRIZM.h>
+  #include <Wire.h>
+  PRIZM prizm;
+  int distance;
+
+void setup() {
+
+  prizm.PrizmBegin();           // initialize PRIZM
+  prizm.setMotorInvert(1,1);    // invert the direction of DC Motor 1 to harmonize direction
+  Serial.begin(9600);     // configure the serial monitor for 9600 baud rate
+                              
+}
+
+void loop() {
+
+  distance = prizm.readSonicSensorCM(3);
+  Serial.print(distance);   // print the CM distance to the serial monitor
+  Serial.println(" Centimeters");             // print " Centimeters"
+
+  if(distance < 10){
+    prizm.setMotorPowers(-30, -30);
+  }
+  else if(distance >= 10 && distance <= 20){
+    prizm.setMotorPowers(125, 125);
+  }
+  else{
+    prizm.setMotorPowers(30, 30);
+  }
+  
+  //delay(100);
+  // implement looking for hand
+
+}
+
+
+
+
+
+
